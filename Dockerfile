@@ -1,16 +1,4 @@
-#Build stage
-
-FROM gradle:latest AS BUILD
-WORKDIR /usr
-COPY . .
-RUN gradle build
-
-# Package stage
-
 FROM openjdk:11
-ENV JAR_NAME=app.jar
-ENV APP_HOME=/usr
-WORKDIR $APP_HOME
-COPY --from=BUILD $APP_HOME .
+COPY build/libs/*.jar /usr/app.jar
 EXPOSE 8081
-ENTRYPOINT exec java -jar $APP_HOME/build/libs/$JAR_NAME
+ENTRYPOINT ["java","-jar","/usr/app.jar"]
