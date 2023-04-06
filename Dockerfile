@@ -1,7 +1,7 @@
 #Build stage
 
 FROM gradle:latest AS BUILD
-WORKDIR /usr/app/
+WORKDIR /usr/
 COPY . .
 RUN gradle build
 
@@ -9,7 +9,7 @@ RUN gradle build
 
 FROM openjdk:11
 ENV JAR_NAME=app.jar
-ENV APP_HOME=/usr/app/
+ENV APP_HOME=/usr/
 WORKDIR $APP_HOME
 COPY --from=BUILD $APP_HOME .
 EXPOSE 8081
