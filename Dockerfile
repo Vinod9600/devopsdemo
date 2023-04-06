@@ -1,7 +1,7 @@
 #Build stage
 
 FROM gradle:latest AS BUILD
-WORKDIR /usr/app/
+WORKDIR /usr/games/
 COPY . .
 RUN gradle build
 
